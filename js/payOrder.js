@@ -1,7 +1,4 @@
-// chenhuaan
-// 提交订单页面
 
-// 立即执行
 (function(){
 	var playOrder = {
 		
@@ -141,14 +138,9 @@
 		
 		// 查询列表
 		queryList: function(){
-			var self = this;
-			var list = common.getData('idList')
-			var url = common.urlRoot + '/placeOrder';
-			var data = {
-				list: list
-			};
-			common.ajax(url, data, function(res){
-				self.render(res)
+			const url = common.urlRoot + '/getUsers';
+			common.ajax(url, {}, res => {
+				this.vm.currentCoupon = res.data[0].ownCoupons
 			})
 		}
 	}

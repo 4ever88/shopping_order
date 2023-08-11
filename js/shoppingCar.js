@@ -72,7 +72,10 @@
 					goToPay() {
 						if (this.amount === 0) {
 							alert('请选择产品后再结算')
+							return
 						}
+						localStorage.fullPay = this.amount
+						location.href = "./payOrder.html"
 					},
 					editCart() {
 						this.isEdit = !this.isEdit
