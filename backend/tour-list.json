@@ -1,0 +1,100 @@
+{
+    "resCode": "200",
+    "resMsg": "获取度假信息成功",
+    "banner": [
+      {
+        "adId": "229",
+        "adCaption": "广发真情卡 满400减200",
+        "adImageUrl": "images/guangfazhenqingkah5.jpg",
+        "adOpenUrl": "#"
+      },
+      {
+        "adId": "218",
+        "adCaption": "来长隆 当暑假大玩家",
+        "adImageUrl": "images/changlong.jpg",
+        "adOpenUrl": "#"
+      },
+      {
+        "adId": "227",
+        "adCaption": "华夏银行特权季",
+        "adImageUrl": "images/huaxiayinhang.jpg",
+        "adOpenUrl": "#"
+      },
+      {
+        "adId": "217",
+        "adCaption": "夏日海岛 浮潜踏浪",
+        "adImageUrl": "images/fuqiantalang.jpg",
+        "adOpenUrl": "#"
+      },
+      {
+        "adId": "210",
+        "adCaption": "9999元环球旅游卡",
+        "adImageUrl": "images/huanqiulvyou.jpg",
+        "adOpenUrl": "#"
+      },
+      {
+        "adId": "199",
+        "adCaption": "七夕",
+        "adImageUrl": "images/qixi.jpg",
+        "adOpenUrl": "#"
+      }
+    ],
+    "hotline": [
+      {
+        "productId": "10000",
+        "productCaption": "<清远古龙峡一日跟团游>古龙峡漂流纯玩一天游 ",
+        "productImageUrl": "images/qingyuan.jpg",
+        "productOrignalPrice": 123,
+        "productPrice": 123,
+        "productType": "holidayInfo"
+      },
+      {
+        "productId": "10001",
+        "productCaption": "<佛山鹤山两日跟团游>住挂五星鹤山碧桂园酒店+巴厘岛式泳池+佛山李小龙乐园",
+        "productImageUrl": "images/foshanheshan.png",
+        "productOrignalPrice": 379,
+        "productPrice": 379,
+        "productType": "holidayInfo"
+      },
+      {
+        "productId": "10002",
+        "productCaption": "<贵阳+黄果树+西江苗寨4日跟团游>动车往返/醉美西江苗文化+深度体验黄果树风景区",
+        "productImageUrl": "images/guiyang.jpg",
+        "productOrignalPrice": 1750,
+        "productPrice": 1750,
+        "productType": "holidayInfo"
+      },
+      {
+        "productId": "10003",
+        "productCaption": "<张家界+天门山+凤凰古城5日跟团游>深圳高铁往返/猛洞河漂流+芙蓉镇+赠送烟雨张家界",
+        "productImageUrl": "images/zhangjiajie.jpg",
+        "productOrignalPrice": 2180,
+        "productPrice": 2180,
+        "productType": "holidayInfo"
+      },
+      {
+        "productId": "10004",
+        "productCaption": "<斯里兰卡6晚7日跟团游>品纳瓦拉//丹不拉/康提/西格里亚/诺瓦伊利亚/亚拉 ",
+        "productImageUrl": "images/sililanka.jpg",
+        "productOrignalPrice": 5080,
+        "productPrice": 5080,
+        "productType": "freeInfo"
+      },
+      {
+        "productId": "10005",
+        "productCaption": "<澳洲+大堡礁8日跟团游>品特色美食/穿越热带雨林/游览大堡礁阳光之旅",
+        "productImageUrl": "images/aozhou.jpg",
+        "productOrignalPrice": 10899,
+        "productPrice": 10899,
+        "productType": "freeInfo"
+      },
+      {
+        "productId": "10006",
+        "productCaption": "<海南2-5日自由行（五星）>三亚龙沐湾温德姆酒店/西海岸线国际五星酒店，醉美落日海滩",
+        "productImageUrl": "images/hainan.jpg",
+        "productOrignalPrice": 1680,
+        "productPrice": 299,
+        "productType": "freeInfo"
+      }
+    ]
+  }
