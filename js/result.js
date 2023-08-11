@@ -14,7 +14,6 @@
 					payInfo: JSON.parse(localStorage.payInfo)
 				},
 				mounted() {
-					this.queryList()
 				},
 				computed: {
 	

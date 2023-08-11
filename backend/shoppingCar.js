@@ -4,7 +4,6 @@ const fs = require('fs');
 var cors = require('cors')
 app.use(express.urlencoded())
 const connection = require('./sql');
-const { stringify } = require('querystring');
 
 
 
@@ -26,6 +25,10 @@ const stringData = function (data) {
     })
   })
   return data
+}
+
+const saveCoupon = function () {
+
 }
 
 
@@ -111,6 +114,8 @@ app.post('/queryUserCoupon', cors(), (req, res) => {
     connection.query(sql,(err, data) => {
       if(err) {
           res.json({msg: err.sqlMessage, code: 0})
+      } else if (!JSON.parse(data[0].ownCoupons).length) {
+        res.json({msg:'查询成功', code: '200', data: []})
       } else {
           let [{ ownCoupons }] = data
           ownCoupons = JSON.parse(ownCoupons)
@@ -137,10 +142,45 @@ app.post('/saveCoupon', cors(), (req, res) => {
       }
     })
 })
-app.post('/placeOrder', cors(), (req, res) => {
-  let data = fs.readFileSync('./tour-list.json', 'utf8');
-  response.send(data)
+app.post('/deleteCoupon', cors(), (req, res) => {
+  const { couponId, username } = req.body
+  const sql = `select * from user where username='${username}'`
+  connection.query(sql,(err, data) => {
+    if(err) {
+        res.json({msg: err.sqlMessage, code: 0})
+    } else {
+      let [{ ownCoupons }] = data
+      ownCoupons = JSON.parse(ownCoupons)
+      ownCoupons.map((item, i) => {
+        if (item === couponId) {
+          ownCoupons.splice(i, 1)
+        }
+      })
+      const couponSql = `UPDATE user set ownCoupons='${JSON.stringify(ownCoupons)}' where username='${username}'`
+      connection.query(couponSql,(err, data) => {
+        if(err) {
+            res.json({msg: err.sqlMessage, code: 0})
+        } else {
+            res.json({msg:'保存成功', code: '200'})
+        }
+      })
+    }
+  })
 })
+
+
+app.post('/deleteProducts', cors(), (req, res) => {
+  const { productIds, username } = req.body
+    const sql = `delete from user_cart where productId in (${productIds.join(',')}) and username='${username}'`
+    connection.query(sql,(err, data) => {
+    if(err) {
+        res.json({msg: err.sqlMessage, code: 0})
+    } else {
+        res.json({msg:'删除成功', code: '200'})
+    }
+  })
+})
+
 app.post('/getVerifyCode', cors(), (req, res) => {
   let data = fs.readFileSync('./tour-list.json', 'utf8');
   response.send(data)

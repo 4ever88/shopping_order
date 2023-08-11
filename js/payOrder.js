@@ -72,6 +72,7 @@
 							discount: this.selectedCoupon
 						}
 						localStorage.payInfo = JSON.stringify(payInfo)
+						localStorage.selectedCoupon = JSON.stringify(this.selectedCoupon)
 						location.href = 'payIndex.html';
 					}
 				}

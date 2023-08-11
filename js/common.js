@@ -16,7 +16,8 @@
 
 		init: function () {
 			this.env = 'stg';
-			this.urlRoot = 'http://172.16.239.145:3000';
+			// this.urlRoot = 'http://172.16.239.145:3000';
+			this.urlRoot = 'http://192.168.10.124:3000';
 			this.stringToFixed();
 		},
 

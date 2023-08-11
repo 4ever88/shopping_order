@@ -13,8 +13,11 @@
 		
 		// 绑定事件
 		bindEvents: function(){
+			const self = this
 			$('#face_pay a').on('click',function(){
-				location.href = 'result.html'
+				const { couponId = ''} = JSON.parse(localStorage.selectedCoupon || '{}')
+				couponId.length && self.deleteCoupon(couponId)
+				self.deleteProducts()
 			})
 		},
 		
@@ -28,7 +31,28 @@
 		queryList: function(){
 			var self = this;
 			self.render()
+		},
+		deleteCoupon: function(couponId) {
+			const url = common.urlRoot + '/deleteCoupon';
+			const params = {
+				couponId
+			}
+			common.ajax(url, params, res => {
+				
+				// location.href = 'result.html'
+			})
+		},
+		deleteProducts: function() {
+			const url = common.urlRoot + '/deleteProducts';
+			const productIds = JSON.parse(localStorage.selectedRows).map(item => item.productId)
+			const params = {
+				productIds: productIds
+			}
+			common.ajax(url, params, res => {
+				location.href = 'result.html'
+			})
 		}
+
 	}
 	// 执行初始化
 	faceToFace.init()
