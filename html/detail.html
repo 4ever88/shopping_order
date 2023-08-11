@@ -1,0 +1,97 @@
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <title>商品详情页</title>
+</head>
+
+<body id="product_details" class="wrapper">
+    <div id="detail_main">
+        <div id="header">
+            <div id="home"><a href="home.html">好邻居</a></div>
+            <div id="my"><a></a></div>
+        </div> 
+        <div id="main">
+            <div id="section1">
+                <div id="slideBox" class="slideBox">
+                    <div class="bd">
+                    <ul>
+                        <li>
+                            <a class="pic" href="#"><img :src="detail.imgUrl"/></a>
+                        </li>
+                    
+                    </ul>
+                    </div>
+                    <div class="hd">
+                    <ul></ul>
+                    </div>
+                </div>
+                <div class="shopping_box">
+                    <h2>{{ detail.shopName }} {{ detail.disc }}/欢迎选购</h2>
+                    <div class="shopping_box_bottom">
+                        <div class="unit_price">￥<span>{{ detail.price }}</span></div>
+                        <div class="number">剩余数量：<span>{{ detail.restNum }}</span></div>
+                    </div>
+                </div>
+            </div>
+            <div id="section2">
+                <div class="pro_content clearfix">
+                    <div class="purchase_numtxt fl">购买数量</div>
+                    <div class="purchase_num_box fr">
+                        <div class="minus_icon js_minus" @click="minusNum"></div>
+                        <div id="prdNum" class="number_edit js_num">{{num}}</div>
+                        <div class="add_icon js_add" @click="addNum"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="section3">
+                <div id="graphic_details">
+                    <h2>图文详情</h2>
+                    <div id="graphic_content">
+                        {{ detail.description }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="floatbar_bottom">
+            <div id="floatbar_bottom_cart">
+                <a href="shoppingCar.html"></a>
+                <div v-show="cartList.length" id="carNum" class="car_trolley">{{cartList.length}}</div>
+            </div>
+            <div id="join_car" @click="addCart">加入购物车</div>
+            <div id="buy_now"><a>立即购买</a></div>
+        </div>
+        <!--+-数量弹框-->
+        <div class="pop_wrapper dsn" id="add_minus_Pop">
+            <div class="pop_con">
+                <h2>请输入数量</h2>
+                <div class="number_box">
+                    <div class="number_minus js_minus"></div>
+                    <input type="number" v-model="num" id="number_input" class="po_num">
+                    <div class="number_add js_add" ></div>
+                </div>
+                <div class="pop_btn" id="number_Btn">
+                    <div class="pop_remove_btn">取消</div>
+                    <div class="pop_sure_btn">确定</div>
+                </div>
+            </div>
+        </div>
+        <div class="pop_wrapper dsn" id="hasAdd">
+            <div class="pop_con">
+                <h2>已成功加入购物车!</h2>
+            </div>
+        </div>
+    </div>
+    <script src="../js/libs/zepto.js"></script>
+    <script src="../js/libs/vue.js"></script>
+    <script src="../js/libs/flexible.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/detail.js"></script>
+
+</body>
+
+</html>

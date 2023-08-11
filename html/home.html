@@ -1,0 +1,118 @@
+﻿<!Doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="format-detection" content="telephone=no,email=no">
+<link rel="stylesheet" type="text/css" href="../css/reset.css">
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<title>首页</title>
+<script type="text/javascript" src="../js/libs/flexible.js"></script>
+</head>
+<body id="index" class="wrapper">
+    <div id="header">
+        <div id="home"><a href="home.html">好邻居</a></div>
+        <div id="my"><a></a></div>
+    </div> 
+    <div id="main">
+        <div id="section1">
+            <div id="slideBox" class="slideBox">
+                <div class="bd">
+                  <ul>
+                    <li>
+                        <a class="pic"><img src="../images/img1.png" /></a>
+                    </li>
+                    <li>
+                        <a class="pic"><img src="../images/img1.png"/></a>
+                    </li>
+                    <li>
+                        <a class="pic"><img src="../images/img1.png"/></a>
+                    </li>
+                    <li>
+                        <a class="pic"><img src="../images/img1.png"/></a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="hd">
+                  <ul></ul>
+                </div>
+            </div>
+            <ul id="main_nav">
+                <li id="product_all"><a>全部商品</a></li>
+                <li id="quick_order"><a>快速下单</a></li>
+                <li id="coupons"><a>优惠券</a></li>
+                <li id="my_order"><a>我的订单</a></li>
+            </ul>
+            <div id="main_privilege">
+               <ul id="coupons_wrap" class="clearfix">
+                    <li v-for="list in couponList" :class="{ 'is-get': currentCoupon.includes(list.couponId)}">
+                        <div class="coupons_content" @click="touchCoupon(list.couponId)">
+                            <div class="coupons_l">
+                                <div class="coupons_price">￥<span class="coupons_value">{{ list.money }}</span></div>
+                                <div class="coupons_title">优惠券</div>
+                            </div>
+                            <div class="tap_pay">
+                                <a>点击领取</a>
+                            </div>
+                            <div class="circle_l"></div>
+                            <div class="circle_r"></div>
+                        </div>
+                    </li>
+                </ul> 
+                <div id="recommend">
+                    <img id="img" :src="homeList[0].imgUrl">
+                    <div class="recom_wrap">
+                        <div class="recom_inf">
+                            <div class="recom_tilte">
+                                <div class="recom_txt">现价</div>
+                            </div>
+                            <div class="recom_price">
+                                <p>￥<span id="price">{{ homeList[0].price}}</span></p>
+                                <s >原价：<span id="old-price">{{ homeList[0].oldPrice}}</span></s>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="section2">
+            <div id="main_category">
+                <div id="category_title">
+                    <div id="category_titletxt">分类1</div>
+                    <div id="arrow_more"></div>
+                </div>
+                <ul id="product_list" class="clearfix">
+                    <li :data-id="list.productId" v-for="list in homeList">
+                        <div class="product_box">
+                            <a :href="'./detail.html?productId='+ list.productId"><img :src="list.imgUrl"></a>
+                            <h2><a>{{list.shopName}}</a></h2>
+                            <div class="clearfix">
+                                <div class="product_price fl">￥<span class="product_mpney">{{ list.price?.toFixed(2) }}</span></div>
+                                <div class="product_car fr"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="btn_more">
+                <a> 查看更多商品</a>
+            </div>
+        </div>
+    </div>
+    <div id="pop_car">
+        <div id="carNum" class="car_trolley dsn"></div>
+        <a href="shoppingCar.html"></a>
+    </div>
+    <div class="pop_wrapper dsn" id="hasAdd">
+        <div class="pop_con">
+            <h2>已成功加入购物车!</h2>
+        </div>
+    </div>
+    
+    
+
+    <script src="../js/libs/zepto.js"></script>
+    <script src="../js/libs/vue.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/home.js"></script>
+</body>
+</html>

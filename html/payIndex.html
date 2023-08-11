@@ -1,0 +1,48 @@
+<!Doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="format-detection" content="telephone=no,email=no">
+<link rel="stylesheet" type="text/css" href="../css/reset.css">
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<title>支付页面</title>
+</head>
+<body id="pay_index" class="wrapper">
+	<div class="pay_banner">
+		<div class="pay_bannertxt"></div>
+	</div>
+	<div id="main">
+		<div id="order_inf">
+			<div id="order_inf_header">
+				<div id="home"><a href="home.html">好邻居</a></div>
+			</div>
+			<div class="container">
+				<div class="container_left">订单号</div>
+				<div class="container_right" id="id_order"></div>
+			</div>
+			<div class="container">
+				<div class="container_left">订单金额</div>
+				<div class="container_right">￥<span id="order_price"></span></div>
+			</div>
+			<div class="container">
+				<div class="container_left">优惠券折扣</div>
+				<div class="container_right">￥<span id="order_coupons"></span></div>
+			</div>
+			<div class="container fontcolor">
+				<div class="container_left">还需支付</div>
+				<div class="container_right">￥<span id="order_needpay"></span></div>
+			</div>
+			<div class="bottom_line"></div>
+		</div>
+		<div class="btn_box" id="order_pay_btn">
+			<a href="facetoface.html">微信安全支付</a>
+		</div>
+	</div>
+ <script src="../js/libs/zepto.js"></script>
+ <script src="../js/libs/underscore.js"></script>
+ <script src="../js/libs/flexible.js"></script>
+ <script src="../js/libs/store.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/payIndex.js"></script>
+</body>
+</html>
