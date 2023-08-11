@@ -1,39 +1,30 @@
-// chenhuaan
-// 确认支付页面
 
-//立即执行
 (function(){
 	var payIndex = {
 		
 		// 初始化
 		init: function(){
-			this.queryList();
-			this.bindEvents()
+			this.initVm()
 		},
-		
-		// 绑定事件
-		bindEvents: function(){},
-		
-		// 渲染页面
-		render: function(data){
-			$('#id_order').text(data.orderNum);
-			$('#order_price').text(data.orderMoney);
-			$('#order_coupons').text(data.discount);
-			$('#order_needpay').text(data.needToPay)
-		},
-		
-		// 请求数据
-		queryList: function(){
-			var self = this;
-			var url = common.urlRoot + '/pay';
-			var data = store.get('all');
-			var data = {
-				data: data
-			};
-			common.ajax(url, data, function(){
-				self.render(data.data)
+
+		initVm: function(){
+			this.vm = new Vue({
+				el: '#pay_main',
+				data: {
+					payInfo: JSON.parse(localStorage.payInfo),
+				},
+				mounted() {
+				},
+				computed: {
+				
+				},
+				// 绑定事件
+				methods: {
+				
+				}
 			})
 		}
+		
 	}
 	// 执行初始化
 	payIndex.init()

@@ -20,8 +20,8 @@
 		
 		// 渲染页面
 		render: function(){
-			var data = store.get('all');
-			$('#need_pay').text(data.needToPay)
+			var data = store.get('payInfo');
+			$('#need_pay').text(data.totalMount)
 		},
 		
 		// 请求数据

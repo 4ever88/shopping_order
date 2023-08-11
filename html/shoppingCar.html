@@ -19,7 +19,7 @@
         <div id="shoppingcar">
             <div id="main">
                 <ul id="shopping_list">
-                    <li class="select" :data-id="item.id" v-for="item in cartList">
+                    <li class="select" :data-id="item.id" v-for="(item, i) in cartList">
                         <div :class="{'no_select': true, 'select_ok': selectedProducts.includes(item.productId)}" @click="() => selectRow(item.productId)"></div>
                         <div class="shopping_img"><img :src="item.imgUrl"></a></div>
                         <div class="shopping_box">
@@ -27,12 +27,12 @@
             
                             <div class="shopping_box_bottom">
                                 <div class="unit_price">￥<span>{{ item.price.toFixed(2) }}</span></div>
-                                <div class="number">x<span>{{ item.num }}</span></div>
+                                <div class="number" v-if="!isEdit" @click="showEditNum = true">x<span>{{ item.num }}</span></div>
                                 <!--编辑状态加减框-->
-                                <div class="number_content dsn">
-                                    <div class="minus_icon js_minus"></div>
+                                <div class="number_content" v-else>
+                                    <div class="minus_icon js_minus" @click="minusNum(item, i)"></div>
                                     <div class="number_edit">{{ item.num }}</div>
-                                    <div class="add_icon js_add"></div>
+                                    <div class="add_icon js_add" @click="addNum(item, i)"></div>
                                 </div>
                             </div>
                         </div>
@@ -49,10 +49,10 @@
                     <div id="total_txt">合计</div>
                 </div>
                 <div id="account_btn" v-if="!isEdit" @click="goToPay">去结算</div>
-                <div id="delete_btn" v-else="isEdit" @click="deleteCart">删除</div>
+                <div id="delete_btn" v-else="isEdit" @click="confirmDeleteCart">删除</div>
             </div>
             <!--+-数量弹框-->
-            <div class="pop_wrapper dsn" id="add_minus_Pop">
+            <div class="pop_wrapper" v-show="showEditCount" id="add_minus_Pop">
                 <div class="pop_con">
                     <h2>请输入数量</h2>
 
@@ -68,17 +68,17 @@
                     </div>
                 </div>
             </div>
-            <div class="pop_wrapper dsn" id="sure_Del">
+            <div class="pop_wrapper" v-show="confirmDelete" id="sure_Del">
                 <div class="pop_con">
                     <h2>确定删除这<span></span>件商品吗？</h2>
 
                     <div class="pop_btn" id="sure_Del_btn">
-                        <div class="pop_remove_btn">考虑一下</div>
-                        <div class="pop_sure_btn">确定</div>
+                        <div class="pop_remove_btn" @click="confirmDelete = false">考虑一下</div>
+                        <div class="pop_sure_btn" @click="deleteCart">确定</div>
                     </div>
                 </div>
             </div>
-            <div class="pop_wrapper dsn" id="none_Select">
+            <div class="pop_wrapper" v-show="showEmpty" id="none_Select" @click="showEmpty = false">
                 <div class="pop_con">
                     <h2>您还没有选择商品哦！</h2>
                 </div>

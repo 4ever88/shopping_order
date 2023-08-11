@@ -105,6 +105,27 @@ app.post('/coupon', cors(), (req, res) => {
     })
 })
 
+app.post('/queryUserCoupon', cors(), (req, res) => {
+  const { username } = req.body
+  const sql = `SELECT * FROM user where username='${username}'`
+    connection.query(sql,(err, data) => {
+      if(err) {
+          res.json({msg: err.sqlMessage, code: 0})
+      } else {
+          let [{ ownCoupons }] = data
+          ownCoupons = JSON.parse(ownCoupons)
+          const couponSql = `SELECT * FROM coupon where couponId in (${ownCoupons.join(',')})`
+          connection.query(couponSql,(err, data) => {
+            if(err) {
+                res.json({msg: err.sqlMessage, code: 0})
+            } else {
+                res.json({msg:'查询成功', code: '200', data: data})
+            }
+          })
+      }
+    })
+})
+
 app.post('/saveCoupon', cors(), (req, res) => {
     const { couponList, username } = req.body
     const sql = `UPDATE user set ownCoupons='${JSON.stringify(couponList)}' where username='${username}'`
@@ -132,8 +153,6 @@ app.post('/editCar', cors(), (req, res) => {
 app.post('/deleteShopCart', cors(), (req, res) => {
   const { deleteList, username } = req.body
     const sql = `delete from user_cart where productId in (${deleteList.join(',')}) and username='${username}'`
-    console.log(`deleteList.join(','):`)
-    console.log(deleteList.join(','))
     connection.query(sql,(err, data) => {
       if(err) {
           res.json({msg: err.sqlMessage, code: 0})
