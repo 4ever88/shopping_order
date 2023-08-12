@@ -85,7 +85,7 @@ app.post('/addToShopCar', cors(), (req, res) => {
       })
     } else {
       // 如果有购物车数据,则更新一条
-      const sqlCart = `UPDATE user_cart set num='${prdNum}' 
+      const sqlCart = `UPDATE user_cart set num=${prdNum}
         where username='${username}' and productId='${productId}'`
       connection.query(sqlCart, (err, data) => {
         if(err) {

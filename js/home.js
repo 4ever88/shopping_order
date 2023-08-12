@@ -6,22 +6,26 @@
 	const home = {
 		// 初始化
 		init: function(){
-			this.queryList();
-			this.queryUser()
-			this.queryCoupon();
 			this.initVm();
 		},
 		// 初始化数据模型
 		initVm: function(){
-			const self = this;
-			self.vm = new Vue({
+			this.vm = new Vue({
 				el: '#main',
 				data: {
 					homeList: [{
 
 					}],
 					couponList: [],
-					currentCoupon: []
+					currentCoupon: [],
+					cartList: [],
+					hasAdd: false,
+				},
+				mounted() {
+					this.queryList();
+					this.queryUser()
+					this.queryCoupon();
+					this.queryShopCartList()
 				},
 				// 绑定事件
 				methods: {
@@ -39,69 +43,54 @@
 							alert('领取成功!')
 							this.currentCoupon = currentCoupon
 						})
-					}
+					},
+					addCart(list) {
+						// 加入购物车，请求数据
+						const url = common.urlRoot + '/addToShopCar';
+						const inCartProduct = this.cartList.find(item => item.productId = list.productId) || {}
+						const prdNum = inCartProduct.num + 1
+						const data = {
+							productId: list.productId,
+							prdNum
+						};
+						common.ajax(url, data, res => {
+							this.queryShopCartList()
+							this.hasAdd = true
+						})
+					},
+							// 请求数据
+					queryList(){
+						const data = {}
+						const url = common.urlRoot + '/shopListQuery';
+						common.ajax(url, data, res => {
+							this.homeList = res.data
+						})
+					},
+
+					queryUser() {
+						const url = common.urlRoot + '/getUsers';
+						common.ajax(url, {}, res => {
+							this.currentCoupon = res.data[0].ownCoupons
+						})
+					},
+
+					queryShopCartList() {
+						const url = common.urlRoot + '/shopCarList';
+						common.ajax(url, {}, res => {
+							this.cartList = [...res.data]
+						})
+					},
+
+					queryCoupon(){
+						const data = {}
+						const url = common.urlRoot + '/coupon';
+						common.ajax(url, data, res => {
+							this.couponList = res.data
+						})
+					},
 				}
 			});
 		},
-		
-		
-		addCart: function(id){
-			const self = this;
-			const prdNum = 1;
-			const url = common.urlRoot + '/addToShopCar';
-			const data = {
-				id: id,
-				prdNum: prdNum
-			};
-			common.ajax(url, data, function(res){
-				// 点击添加购物车后弹框
-				$('#hasAdd').removeClass('dsn');
-				// 弹框0.4秒后自动消失
-				setTimeout(function(){
-					$('#hasAdd').addClass('dsn')
-				},400);
-				// 如果小红点消失，则显示
-				if ($('#carNum').hasClass('dsn')){
-					$('#carNum').removeClass('dsn')
-				}// 如果添加产品为新，购物车商品数量加1
-				const num = $('#carNum').text();
-				if (res.newly === 'Y'){
-					$('#carNum').text(++num);
-				}
-			})
-		},
-		
-		getMore: function(){
-		},
-		
-		// 请求数据
-		queryList: function(){
-			const self = this;
-			const data = {}
-			const url = common.urlRoot + '/shopListQuery';
-			common.ajax(url, data, function(res){
-				self.vm.homeList = res.data
-			})
-		},
-
-		queryUser() {
-			const url = common.urlRoot + '/getUsers';
-			common.ajax(url, {}, res => {
-				this.vm.currentCoupon = res.data[0].ownCoupons
-			})
-		},
-
-		queryCoupon: function(){
-			const self = this;
-			const data = {}
-			const url = common.urlRoot + '/coupon';
-			common.ajax(url, data, function(res){
-				self.vm.couponList = res.data
-			})
-		},
-
-		
-		
 	}
 	//执行初始化
 	home.init()

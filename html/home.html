@@ -87,7 +87,7 @@
                             <h2><a>{{list.shopName}}</a></h2>
                             <div class="clearfix">
                                 <div class="product_price fl">￥<span class="product_mpney">{{ list.price?.toFixed(2) }}</span></div>
-                                <div class="product_car fr"></div>
+                                <div class="product_car fr" @click="addCart(list)"></div>
                             </div>
                         </div>
                     </li>
@@ -97,19 +97,17 @@
                 <a> 查看更多商品</a>
             </div>
         </div>
-    </div>
-    <div id="pop_car">
-        <div id="carNum" class="car_trolley dsn"></div>
-        <a href="shoppingCar.html"></a>
-    </div>
-    <div class="pop_wrapper dsn" id="hasAdd">
-        <div class="pop_con">
-            <h2>已成功加入购物车!</h2>
+        <div id="pop_car">
+            <div id="carNum" class="car_trolley" v-show="cartList.length">{{cartList.length}}</div>
+            <a href="shoppingCar.html"></a>
+        </div>
+        <div class="pop_wrapper" v-show="hasAdd" id="hasAdd" @click="hasAdd = false">
+            <div class="pop_con">
+                <h2>已成功加入购物车!</h2>
+            </div>
         </div>
     </div>
-    
-    
-
+  
     <script src="../js/libs/zepto.js"></script>
     <script src="../js/libs/vue.js"></script>
     <script src="../js/common.js"></script>
