@@ -47,7 +47,7 @@
 					addCart(list) {
 						// 加入购物车，请求数据
 						const url = common.urlRoot + '/addToShopCar';
-						const inCartProduct = this.cartList.find(item => item.productId = list.productId) || {}
+						const inCartProduct = this.cartList.find(item => item.productId === list.productId) || {num: 0}
 						const prdNum = inCartProduct.num + 1
 						const data = {
 							productId: list.productId,
