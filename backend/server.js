@@ -21,16 +21,11 @@ const stringData = function (data) {
   const keys = ['ownCoupons']
   keys.map(key => {
     data.map(item => {
-      item[key] = item[key].split(',')
+      item[key] = JSON.parse(item[key])
     })
   })
   return data
 }
-
-const saveCoupon = function () {
-
-}
-
 
 app.post('/getUsers', cors(), (req,res)=>{
     const { username } = req.body
@@ -223,7 +218,7 @@ app.post('/register', cors(), (req, res) => {
   connection.query(user, (err, userDatas) => {
     const newId = userDatas[userDatas.length - 1].userId
     const sql = `insert into user(username, userId, ownCoupons, password) 
-    values('${username}', '${fixZero(newId)}', '', '${password}')`
+    values('${username}', '${fixZero(newId)}', '"[]"', '${password}')`
     connection.query(sql,(err, data) => {
       if(err) {
           res.json({msg:'注册失败', code: 0})
