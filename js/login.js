@@ -50,6 +50,7 @@
 			};
 			common.ajax(url, data, function(res){
 				localStorage.username = userName
+				alert('登录成功!')
 				location.href = 'home.html'
 			})
 		}
