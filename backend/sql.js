@@ -6,9 +6,9 @@ var connection = mysql.createConnection({
   host     : 'localhost',   // 你要连接的数据库服务器的地址
   port     : 3306,// 端口号
   user     : 'root',        // 连接数据库服务器需要的用户名
-  password : 'abcd1234',        // 连接数据库服务器需要的密码
-  // database : 'shopping_order'      //你要连接的数据库的名字
-  database : 'shopping_cart'      //你要连接的数据库的名字
+  password : 'abc123',        // 连接数据库服务器需要的密码
+  database : 'shopping_order'      //你要连接的数据库的名字
+  // database : 'shopping_cart'      //你要连接的数据库的名字
 });
  
 // 3. 连接数据库

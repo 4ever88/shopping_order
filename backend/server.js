@@ -21,7 +21,7 @@ const stringData = function (data) {
   const keys = ['ownCoupons']
   keys.map(key => {
     data.map(item => {
-      item[key] = JSON.parse(item[key])
+      item[key] = item[key].split(',')
     })
   })
   return data
@@ -218,12 +218,12 @@ app.post('/shopCarList', cors(), (req, res) => {
 })
 
 app.post('/register', cors(), (req, res) => {
-  const { username } = req.body
+  const { username, password } = req.body
   const user = `SELECT * FROM user`
   connection.query(user, (err, userDatas) => {
     const newId = userDatas[userDatas.length - 1].userId
-    const sql = `insert into user(username, userId, ownCoupons) 
-    values('${username}', '${fixZero(newId)}', '[]')`
+    const sql = `insert into user(username, userId, ownCoupons, password) 
+    values('${username}', '${fixZero(newId)}', '', '${password}')`
     connection.query(sql,(err, data) => {
       if(err) {
           res.json({msg:'注册失败', code: 0})
@@ -236,8 +236,8 @@ app.post('/register', cors(), (req, res) => {
 })
 
 app.post('/login', cors(), (req, res) => {
-  const { username } = req.body
-  const sql = `SELECT * FROM user where username='${username}'`
+  const { username, password } = req.body
+  const sql = `SELECT * FROM user where username='${username}' and password='${password}'`
     connection.query(sql,(err, data) => {
       if(err || !data.length) {
           res.json({msg:'登录失败', code: 0})

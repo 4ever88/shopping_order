@@ -99,7 +99,7 @@
 				var url = common.urlRoot + '/register';
 				var data = {
 					// phone: phone,
-					// password: psw,
+					password: psw,
 					// verifyCode: code,
 					username: username
 				};
