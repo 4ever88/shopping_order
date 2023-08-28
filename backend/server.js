@@ -176,15 +176,6 @@ app.post('/deleteProducts', cors(), (req, res) => {
   })
 })
 
-app.post('/getVerifyCode', cors(), (req, res) => {
-  let data = fs.readFileSync('./tour-list.json', 'utf8');
-  response.send(data)
-})
-app.post('/editCar', cors(), (req, res) => {
-  let data = fs.readFileSync('./tour-list.json', 'utf8');
-  response.send(data)
-})
-
 app.post('/deleteShopCart', cors(), (req, res) => {
   const { deleteList, username } = req.body
     const sql = `delete from user_cart where productId in (${deleteList.join(',')}) and username='${username}'`
@@ -242,16 +233,6 @@ app.post('/login', cors(), (req, res) => {
     })
 })
 
-app.post('/getDetail', cors(), (req, res) => {
-  let data = fs.readFileSync('./details.json', 'utf8');
-  const dd = {
-    "resCode": "200",
-    "resMsg": "获取度假明细成功",
-    "data": eval(data).find(item => item.productId === req.body.productId)
-  }
-  response.send(dd)
-})
-  
 app.listen(3000, function () {
   console.log('app listening on port 3000!')
 })
