@@ -113,8 +113,8 @@ app.post('/queryUserCoupon', cors(), (req, res) => {
         res.json({msg:'查询成功', code: '200', data: []})
       } else {
           let [{ ownCoupons }] = data
-          ownCoupons = JSON.parse(ownCoupons)
-          const couponSql = `SELECT * FROM coupon where couponId in (${ownCoupons.join(',')})`
+          ownCoupons = JSON.parse(ownCoupons).join(',')
+          const couponSql = `SELECT * FROM coupon where couponId in (${ownCoupons})`
           connection.query(couponSql,(err, data) => {
             if(err) {
                 res.json({msg: err.sqlMessage, code: 0})
@@ -218,7 +218,7 @@ app.post('/register', cors(), (req, res) => {
   connection.query(user, (err, userDatas) => {
     const newId = userDatas[userDatas.length - 1].userId
     const sql = `insert into user(username, userId, ownCoupons, password) 
-    values('${username}', '${fixZero(newId)}', '"[]"', '${password}')`
+    values('${username}', '${fixZero(newId)}', '[]', '${password}')`
     connection.query(sql,(err, data) => {
       if(err) {
           res.json({msg:'注册失败', code: 0})
