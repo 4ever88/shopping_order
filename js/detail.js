@@ -91,8 +91,8 @@
 						})
 					},
 					goToPay() {
-						this.cartList[0].num = this.num
-						localStorage.selectedRows = JSON.stringify(this.cartList)
+						this.detail.num = this.num
+						localStorage.selectedRows = JSON.stringify([this.detail])
 						location.href = "./payOrder.html"
 					}
 				}
