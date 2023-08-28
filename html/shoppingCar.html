@@ -40,8 +40,8 @@
                 </ul>
             </div>
             <div id="floatbar_bottom">
-                <div id="select_all" class="select">
-                    <div :class="{'select_all': true, 'no_select': true, 'select_ok': isCheckAll}" @click="selectAll"></div>
+                <div id="select_all" class="select" @click="selectAll">
+                    <div :class="{'select_all': true, 'no_select': true, 'select_ok': isCheckAll}"></div>
                     <div class="select_all_txt">全选</div>
                 </div>
                 <div id="total_box"><!---->
