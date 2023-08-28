@@ -17,9 +17,12 @@
 				el: '#detail_main',
 				data: {
 					detail: {},
+					editNum: 0,
 					num: 1,
 					cartNum: 0,
-					cartList: []
+					cartList: [],
+					addCartSuccess: false,
+					showEditNum: false
 				},
 				mounted() {
 					this.queryDetail()
@@ -36,7 +39,7 @@
 							prdNum: this.num
 						};
 						common.ajax(url, data, res => {
-							alert('添加购物车成功!')
+							this.addCartSuccess = true
 							this.queryList()
 						})
 					},
@@ -46,6 +49,28 @@
 					},
 					addNum() {
 						this.num++
+					},
+					minusEditNum() {
+						if (this.editNum === 1) return
+						this.editNum--
+					},
+					addEditNum() {
+						this.editNum++
+					},
+					openEditNumDialog() {
+						this.editNum = this.num
+						this.showEditNum = true
+					},
+					cancelEdit() {
+						this.showEditNum = false
+					},
+					confirmEdit() {
+						if (this.editNum <= 0) {
+							alert('数量不能小于1!')
+							return
+						}
+						this.num = this.editNum
+						this.showEditNum = false
 					},
 					// 请求数据
 					queryDetail() {
@@ -62,9 +87,14 @@
 						const url = common.urlRoot + '/shopCarList';
 						common.ajax(url, {}, res => {
 							this.cartList = res.data
+							this.num = this.cartList[0]?.num || 1
 						})
 					},
-					
+					goToPay() {
+						this.cartList[0].num = this.num
+						localStorage.selectedRows = JSON.stringify(this.cartList)
+						location.href = "./payOrder.html"
+					}
 				}
 			});
 		}

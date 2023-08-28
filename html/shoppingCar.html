@@ -21,7 +21,7 @@
                 <ul id="shopping_list">
                     <li class="select" :data-id="item.id" v-for="(item, i) in cartList">
                         <div :class="{'no_select': true, 'select_ok': selectedProducts.includes(item.productId)}" @click="() => selectRow(item.productId)"></div>
-                        <div class="shopping_img"><img :src="item.imgUrl"></a></div>
+                        <div class="shopping_img"><a :href="'./detail.html?productId='+ item.productId"><img :src="item.imgUrl"></a></div>
                         <div class="shopping_box">
                             <h2>{{ item.shopName }}</h2>
             

@@ -43,7 +43,7 @@
                     <div class="purchase_numtxt fl">购买数量</div>
                     <div class="purchase_num_box fr">
                         <div class="minus_icon js_minus" @click="minusNum"></div>
-                        <div id="prdNum" class="number_edit js_num">{{num}}</div>
+                        <div id="prdNum" class="number_edit js_num" @click="openEditNumDialog">{{num}}</div>
                         <div class="add_icon js_add" @click="addNum"></div>
                     </div>
                 </div>
@@ -63,24 +63,24 @@
                 <div v-show="cartList.length" id="carNum" class="car_trolley">{{cartList.length}}</div>
             </div>
             <div id="join_car" @click="addCart">加入购物车</div>
-            <div id="buy_now"><a>立即购买</a></div>
+            <div id="buy_now" @click="goToPay"><a>立即购买</a></div>
         </div>
         <!--+-数量弹框-->
-        <div class="pop_wrapper dsn" id="add_minus_Pop">
+        <div class="pop_wrapper" v-show="showEditNum" id="add_minus_Pop">
             <div class="pop_con">
                 <h2>请输入数量</h2>
                 <div class="number_box">
-                    <div class="number_minus js_minus"></div>
-                    <input type="number" v-model="num" id="number_input" class="po_num">
-                    <div class="number_add js_add" ></div>
+                    <div class="number_minus js_minus" @click="minusEditNum"></div>
+                    <input type="number" v-model="editNum" id="number_input" class="po_num">
+                    <div class="number_add js_add" @click="addEditNum"></div>
                 </div>
                 <div class="pop_btn" id="number_Btn">
-                    <div class="pop_remove_btn">取消</div>
-                    <div class="pop_sure_btn">确定</div>
+                    <div class="pop_remove_btn" @click="cancelEdit">取消</div>
+                    <div class="pop_sure_btn" @click="confirmEdit">确定</div>
                 </div>
             </div>
         </div>
-        <div class="pop_wrapper dsn" id="hasAdd">
+        <div class="pop_wrapper" v-show="addCartSuccess" id="hasAdd" @click="addCartSuccess = false">
             <div class="pop_con">
                 <h2>已成功加入购物车!</h2>
             </div>
