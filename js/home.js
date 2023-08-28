@@ -20,6 +20,7 @@
 					currentCoupon: [],
 					cartList: [],
 					hasAdd: false,
+					hasGet: false
 				},
 				mounted() {
 					this.queryList();
@@ -40,7 +41,7 @@
 						}
 						const url = common.urlRoot + '/saveCoupon';
 						common.ajax(url, params, res => {
-							alert('领取成功!')
+							this.hasGet = true
 							this.currentCoupon = currentCoupon
 						})
 					},

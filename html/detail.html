@@ -71,7 +71,7 @@
                 <h2>请输入数量</h2>
                 <div class="number_box">
                     <div class="number_minus js_minus" @click="minusEditNum"></div>
-                    <input type="number" v-model="editNum" id="number_input" class="po_num">
+                    <input type="number" v-model.number="editNum" id="number_input" class="po_num">
                     <div class="number_add js_add" @click="addEditNum"></div>
                 </div>
                 <div class="pop_btn" id="number_Btn">
@@ -83,6 +83,11 @@
         <div class="pop_wrapper" v-show="addCartSuccess" id="hasAdd" @click="addCartSuccess = false">
             <div class="pop_con">
                 <h2>已成功加入购物车!</h2>
+            </div>
+        </div>
+        <div class="pop_wrapper" v-show="notLessThanOne" @click="notLessThanOne = false">
+            <div class="pop_con">
+                <h2>数量不能少于1!</h2>
             </div>
         </div>
     </div>

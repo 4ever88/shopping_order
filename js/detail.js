@@ -21,6 +21,7 @@
 					num: 1,
 					cartNum: 0,
 					cartList: [],
+					notLessThanOne: false,
 					addCartSuccess: false,
 					showEditNum: false
 				},
@@ -65,8 +66,8 @@
 						this.showEditNum = false
 					},
 					confirmEdit() {
-						if (this.editNum <= 0) {
-							alert('数量不能小于1!')
+						if (this.editNum*1 <= 0) {
+							this.notLessThanOne = true
 							return
 						}
 						this.num = this.editNum
